@@ -22,7 +22,7 @@ const Component = () => {
     <div>
       <h1>Test Dux Component</h1>
       <span>{dux.state.a}</span>
-      <button onClick={() => dux.dispatch.Add()}>Incriment</button>
+      <button onClick={() => dux.dispatch.Add()}>Increment</button>
     </div>
   );
 };
