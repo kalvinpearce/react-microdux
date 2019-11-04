@@ -12,9 +12,13 @@ type State = typeof initialState;
 
 const Component = () => {
   const dux = useMicroDux(initialState, {
-    Add: (state, payload: undefined) => ({
+    Add: state => ({
       ...state,
       a: state.a + 1,
+    }),
+    Subtract: (state, payload: number) => ({
+      ...state,
+      a: state.a - payload,
     }),
   });
 
@@ -23,6 +27,11 @@ const Component = () => {
       <h1>Test Dux Component</h1>
       <span>{dux.state.a}</span>
       <button onClick={() => dux.dispatch.Add()}>Increment</button>
+      <input
+        type="button"
+        value="Decrement"
+        onClick={() => dux.dispatch.Subtract(1)}
+      />
     </div>
   );
 };
@@ -44,11 +53,19 @@ describe('useMicroDux', () => {
     expect(span.text()).not.toEqual('2');
   });
 
-  it('displays state of 2 after click', () => {
+  it('displays state of 2 after click Increment', () => {
     const wrapper = mount(<Component />);
     const button = wrapper.find('button');
     button.simulate('click');
     const span = wrapper.find('span');
     expect(span.text()).toEqual('2');
+  });
+
+  it('displays state of 0 after click Decrement', () => {
+    const wrapper = mount(<Component />);
+    const button = wrapper.find('input');
+    button.simulate('click');
+    const span = wrapper.find('span');
+    expect(span.text()).toEqual('0');
   });
 });
