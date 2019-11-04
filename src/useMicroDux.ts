@@ -1,19 +1,22 @@
 import { useReducer } from 'react';
 
-export type Action<State, Payload = undefined> = (
-  state: State,
-  payload?: Payload,
-) => State;
+export type Action<State, Payload> = (state: State, payload: Payload) => State;
+
+type ActionWithoutPayload<State> = (state: State) => State;
+
 interface IActionsMap<State> {
-  [keys: string]: Action<State>;
+  [keys: string]: Action<State, any>;
 }
+
 interface IReducerAction {
   type: string;
   payload: any;
 }
 
-type ExtractPayload<T extends Action<any>> = T extends Action<any, infer P>
-  ? P
+type ExtractPayload<T extends Action<any, any>> = T extends Action<any, infer P>
+  ? T extends ActionWithoutPayload<any>
+    ? never
+    : P
   : never;
 
 export const useMicroDux = <State, ActionsMap extends IActionsMap<State>>(
@@ -23,10 +26,7 @@ export const useMicroDux = <State, ActionsMap extends IActionsMap<State>>(
   // Create reducer to run action's state update
   const reducer = (state: State, action: IReducerAction) => {
     const foundAction = actions[action.type];
-    if (action.payload !== undefined) {
-      return foundAction(state, action.payload);
-    }
-    return foundAction(state);
+    return foundAction(state, action.payload);
   };
 
   // Create a reducer for state management

@@ -8,7 +8,6 @@ configure({ adapter: new Adapter() });
 const initialState = {
   a: 1,
 };
-type State = typeof initialState;
 
 const Component = () => {
   const dux = useMicroDux(initialState, {
