@@ -2,6 +2,7 @@ import { configure, mount } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 import { useMicroDux } from './index';
+import { ActionWithoutPayload } from './useMicroDux';
 
 configure({ adapter: new Adapter() });
 
@@ -9,12 +10,14 @@ const initialState = {
   a: 1,
 };
 
+const addAction: ActionWithoutPayload<typeof initialState> = state => ({
+  ...state,
+  a: state.a + 1,
+});
+
 const Component = () => {
   const dux = useMicroDux(initialState, {
-    Add: state => ({
-      ...state,
-      a: state.a + 1,
-    }),
+    Add: addAction,
     Subtract: (state, payload: number) => ({
       ...state,
       a: state.a - payload,

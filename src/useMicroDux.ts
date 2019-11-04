@@ -1,8 +1,7 @@
 import { useReducer } from 'react';
 
 export type Action<State, Payload> = (state: State, payload: Payload) => State;
-
-type ActionWithoutPayload<State> = (state: State) => State;
+export type ActionWithoutPayload<State> = (state: State) => State;
 
 interface IActionsMap<State> {
   [keys: string]: Action<State, any>;
