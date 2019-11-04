@@ -1,6 +1,6 @@
 <h1 align="center">React MicroDux</h1>
 <p align="center">A small library to help create mini local reducer-like states for components to hopefully delay the need for redux in a react project.<p>
-<p align="center"><a href="https://github.com/kalvinpearce/react-microdux/actions?query=workflow%3A%22Node+CI%22"><img src="https://github.com/kalvinpearce/react-microdux/workflows/Node%20CI/badge.svg" /></a></p>
+<p align="center"><a href="https://github.com/kalvinpearce/react-microdux/actions?query=workflow%3A%22Node+CI%22"><img src="https://github.com/kalvinpearce/react-microdux/workflows/Node%20CI/badge.svg?branch=master" /></a></p>
 
 ### Why?
 The idea is to _reduce_ the amount of boilerplate code required to set up complex local state.
