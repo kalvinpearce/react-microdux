@@ -40,12 +40,17 @@
     "enzyme-adapter-react-16": "^1.15.1",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
+    "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "ts-jest": "^24.1.0",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.6.4",
-    "react": "^16.11.0"
+    "typescript": "^3.6.4"
+  },
+  "peerDependencies": {
+    "@types/react": "^16.9.11",
+    "react": "*",
+    "react-dom": "*"
   },
   "files": [
     "lib/**/*"
