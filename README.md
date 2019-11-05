@@ -3,6 +3,7 @@
 <p align="center"><a href="https://github.com/kalvinpearce/react-microdux/actions?query=workflow%3A%22Node+CI%22"><img src="https://github.com/kalvinpearce/react-microdux/workflows/Node%20CI/badge.svg?branch=master" /></a></p>
 
 ### Why?
+
 The idea is to _reduce_ the amount of boilerplate code required to set up complex local state.
 
 In vanilla react to use a reducer you would normally define:
@@ -38,7 +39,7 @@ const Component = () => {
         ...state,
         a: state.a + payload,
       }),
-      MinusOne: (state, payload: undefined) => ({
+      MinusOne: state => ({
         ...state,
         a: state.a - 1,
       }),

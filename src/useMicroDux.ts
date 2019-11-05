@@ -1,21 +1,22 @@
 import { useReducer } from 'react';
 
-type SingleAction<State> = (state: State) => State;
-type PayloadAction<State, Payload> = (state: State, payload: Payload) => State;
-export type Action<State, Payload> =
-  | SingleAction<State>
-  | PayloadAction<State, Payload>;
+export type Action<State, Payload> = (state: State, payload: Payload) => State;
+export type ActionWithoutPayload<State> = (state: State) => State;
+
 interface IActionsMap<State> {
   [keys: string]: Action<State, any>;
 }
+
 interface IReducerAction {
   type: string;
   payload: any;
 }
 
-type ExtractPayloadFromAction<
-  T extends PayloadAction<any, any>
-> = T extends PayloadAction<any, infer P> ? P : never;
+type ExtractPayload<T extends Action<any, any>> = T extends Action<any, infer P>
+  ? T extends ActionWithoutPayload<any>
+    ? never
+    : P
+  : never;
 
 export const useMicroDux = <State, ActionsMap extends IActionsMap<State>>(
   initialState: State,
@@ -34,11 +35,11 @@ export const useMicroDux = <State, ActionsMap extends IActionsMap<State>>(
   // This type ensures that the function for each action requires the
   // correct payload
   type ActionMapType = {
-    [key in keyof typeof actions]: ExtractPayloadFromAction<
+    [key in keyof typeof actions]: ExtractPayload<
       typeof actions[key]
     > extends undefined
       ? () => void
-      : (payload: ExtractPayloadFromAction<typeof actions[key]>) => void;
+      : (payload: ExtractPayload<typeof actions[key]>) => void;
   };
 
   // Map actions object to an object of dispatch actions
