@@ -27,7 +27,7 @@ It returns an object that contains the state and a dispatch object with each act
 
 ```tsx
 import * as React from 'react';
-import { useMicroDux } from './index';
+import { useMicroDux } from 'react-microdux';
 
 const Component = () => {
   const dux = useMicroDux(
