@@ -1,6 +1,6 @@
 {
   "name": "react-microdux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small library to help create mini local reducer-like states for components to hopefully delay the need for redux in a react project.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
